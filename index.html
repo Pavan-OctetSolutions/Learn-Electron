@@ -9,12 +9,16 @@
     <meta
      content="default-src 'self'; script-src 'self' 'unsafe-eval'"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>Web cam video player!</title>
   </head>
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <div>
+       <h1>This an tutorial to play an video using web cam</h1>
+     <button type="button" id="videoBtn">Click to start</button>
+     <button type="button" id="stopVideoBtn">Stop</button>
+    </div>
+    
+     <Video id="video" autoplay></Video>
   </body>
-  <script src="renderer.js"></script>
+  <script src="camera.js"></script>
 </html>

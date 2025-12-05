@@ -6,7 +6,7 @@ function createWindow() {
     height: 800,
   });
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools(); // For developer console
   win.loadFile("index.html");
 }
 
