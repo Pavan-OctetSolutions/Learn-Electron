@@ -1,6 +1,7 @@
-const information = document.getElementById("info");
+const setButton = document.getElementById('btn');
+const titleInput = document.getElementById('title');
 
-information.innerText = `This app is using Chrome (v${versions.chrome()}), 
-Node.js (v${versions.node()}), and Electron 
-(v${versions.electron()})`;
-
+setButton.addEventListener('click', () => {
+  const title = titleInput.value
+  window.electronAPI.setTitle(title)
+});
