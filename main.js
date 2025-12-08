@@ -1,30 +1,51 @@
 import { app, BrowserWindow, Menu } from "electron";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.env);
+const __dirname = path.dirname(__filename);
 
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 800,
+  const mainWindow = new BrowserWindow({
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+    },
   });
 
-  win.webContents.openDevTools();
-  win.loadFile("index.html");
+  const menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {
+          click: () => mainWindow.webContents.send("update-counter", 1),
+          label: "Increment",
+        },
+        {
+          click: () => mainWindow.webContents.send("update-counter", -1),
+          label: "Decrement",
+        },
+      ],
+    },
+  ]);
+
+  Menu.setApplicationMenu(menu);
+  mainWindow.loadFile("index.html");
+
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
+  ipcMain.on("counter-value", (_event, value) => {
+    console.log(value); // will print value to Node console
+  });
   createWindow();
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
+  app.on("activate", function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
-app.on("window-all-closed", () => {
-  console.log(process.platform);
+app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
-
-
-
-
