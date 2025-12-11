@@ -1,7 +1,9 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld('api', {
-  readDirectory: (dirPath) => ipcRenderer.invoke('read-directory', dirPath)
+contextBridge.exposeInMainWorld("notesAPI", {
+  getAllNotes: async () => ipcRenderer.invoke("get-all-notes"),
+  getNote: async (id) => ipcRenderer.invoke("get-note", id),
+  createNote: async (payload) => ipcRenderer.invoke("create-note", payload),
+  updateNote: async (payload) => ipcRenderer.invoke("update-note", payload),
+  deleteNote: async (id) => ipcRenderer.invoke("delete-note", id),
 });
-
-

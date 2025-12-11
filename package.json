@@ -1,7 +1,7 @@
 {
-  "name": "file-manger-lite",
+  "name": "notes-app",
   "version": "1.0.0",
-  "description": "A simple file system app",
+  "description": "A simple Notes app with CURD operation",
   "main": "electron/main.js",
   "type": "module",
   "scripts": {
@@ -19,11 +19,13 @@
     "@vitejs/plugin-react": "^4.7.0",
     "concurrently": "^8.2.0",
     "electron": "^31.0.0",
+    "electron-rebuild": "^3.2.9",
     "vite": "^5.0.0",
     "wait-on": "^7.2.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
+    "better-sqlite3": "^12.4.6",
+    "dotenv": "^17.2.3",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   }
